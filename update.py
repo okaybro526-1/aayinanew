@@ -46,18 +46,12 @@ if DATABASE_URL is not None:
         environ['UPSTREAM_BRANCH'] = config_dict['UPSTREAM_BRANCH']
     conn.close()
 
-UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
-if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = None
 
-UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
-if len(UPSTREAM_BRANCH) == 0:
-    UPSTREAM_BRANCH = 'master'
+UPSTREAM_BRANCH = 'render'
 
-if UPSTREAM_REPO is not None:
+if UPSTREAM_REPO := 'https://github.com/okaybro526-1/aayinanew':
     if ospath.exists('.git'):
         srun(["rm", "-rf", ".git"])
-
     update = srun([f"git init -q \
                      && git config --global user.email e.anastayyar@gmail.com \
                      && git config --global user.name mltb \
